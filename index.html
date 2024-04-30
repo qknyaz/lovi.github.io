@@ -112,7 +112,7 @@
 			document.getElementById("error").innerText = "";
 			let count = document.getElementById("count").value;
 			let address = document.getElementById("address").value;
-			let phone = document.getElementById("phone").value;
+			let promo = document.getElementById("promo").value;
 			if(count > 5) {
 				document.getElementById("error").innerText = "Большое количество единиц товара";
 				return;
@@ -120,7 +120,7 @@
 			let data = {
 				count: count,
 				address: address,
-				phone: phone
+				promo: promo
 			}
 			tg.sendData(JSON.stringify(data));
 
