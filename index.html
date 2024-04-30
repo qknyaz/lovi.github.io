@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<title>LOVI</title>
+	<style>
+		@import url("https://fonds.googleapis.com/css?family=Montserrat:400,");
+
+		*{
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		body{
+			font-family: 'Montserrat', sans-serif;
+			font-weight: 200;
+			color: var(--tg-theme-text-color);
+			background: var(--tg-theme-text-color);
+		}
+		#main{
+			width: 100%;
+			padding: 20px;
+			text-align: center;
+		}
+		h1 {
+			margin-top: 50px;
+			margin-bottom: 10px;
+		}
+		img{
+			width: 70px;
+			margin: 30px auto;
+		}
+		p{
+			width: 70px;
+			margin: 30px auto;
+		}
+		button{
+			border: 1px solid;
+			border-radius: 5px;
+			margin-top: 50px;
+			height: 60px;
+			width: 200px;
+			font-size: 20px;
+			font-weight: 500;
+			cursor: pointer;
+			transition: all 500ms ease;
+			color: var(--tg-theme-button-text-color);
+			background: var(--tg-theme-button-text-color);
+		}
+		button:hover {
+			background: var(--tg-theme-secondary-bg-color);
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<h1>LOVI</h1>
+		<img src="">
+		<p>Покупка маски для волос</p>
+		<button id="buy">Оформить</button>
+	</div>
+	<form id="form">
+		<input type="text" placeholder="Количество товара" id="count">
+		<input type="text" placeholder="Адрес доставки" id="address">
+		<input type="text" placeholder="Телефон" id="phone">
+		<button id="order">Отправить</button>
+		<div id="error"></div>
+	</form>
+
+	<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<!--	<script src="app.js"></script>-->
+	<script>
+		let tg = window.Telegram.WebApp;
+		let buy = document.getElementById("buy")
+		let order = document.getElementById("order")
+		tg.expand();
+
+		buy.addEventListener("click", () => {
+			document.getElementById("main").style.display = "none";
+			document.getElementById("form").style.display = "block";
+		});
+
+		order.addEventListener("click", () =>  {
+			document.getElementById("error").innerText = "";
+			let count = document.getElementById("count").value;
+			let address = document.getElementById("address").value;
+			let phone = document.getElementById("phone").value;
+			if(count > 5) {
+				document.getElementById("error").innerText = "Большое количество единиц товара";
+				return;
+			}
+			let data = {
+				count: count,
+				address: address,
+				phone: phone
+			}
+			tg.sendData(JSON.stringify(data));
+
+			tg.close()
+		})
+	</script>
+</body>
+</html>
