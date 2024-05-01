@@ -10,21 +10,30 @@
 	</style>
 </head>
 <body>
+	<!-- <img class="bg" src="3.png"> -->
 	<div id="main">
-		<h1>LOVI</h1>
+		<h1 class="main">LOVI</h1>
 		<img src="1.png">
-		<p>Покупка маски для волос</p>
+		<div class="h">
+			<h2>Для безупречной мягкости волос, достаточно 20 минут ухода.</h2>
+		</div>
+		
 		<button id="buy">Оформить</button>
 	</div>
 	<div id="form">
 		<form id="form-1">
 			<input type="text" placeholder="Количество товара" id="count">
+			<span style="color: #ff8888">не более 5 шт.</span>
 			<input type="text" placeholder="Адрес доставки" id="address">
 			<input type="text" placeholder="Промо код" id="promo">
 			<button id="order">Отправить</button>
 			<div id="error"></div>
 		</form>
 	</div>
+	<div>
+		<p id="count_"></p>
+	</div>
+	
 
 	<script src="https://telegram.org/js/telegram-web-app.js"></script>
 <!--	<script src="app.js"></script>-->
@@ -32,6 +41,7 @@
 		let tg = window.Telegram.WebApp;
 		let buy = document.getElementById("buy")
 		let order = document.getElementById("order")
+		let count_ = document.getElementById("count_")
 		tg.expand();
 
 		buy.addEventListener("click", () => {
@@ -47,15 +57,18 @@
 			if(count > 5) {
 				document.getElementById("error").innerText = "Большое количество единиц товара";
 				return;
+				document.getElementById('count_').innerText = count;
 			}
+		
+
 			let data = {
 				count: count,
 				address: address,
 				promo: promo
 			}
-			tg.sendData(JSON.stringify(data));
+		tg.sendData(JSON.stringify(data));
 
-			tg.close()
+		tg.close()
 		})
 	</script>
 </body>
