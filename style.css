@@ -10,12 +10,10 @@ body{
 	font-weight: 200;
 	color: var(--tg-theme-text-color);
 	background: var(--tg-theme-bg-color);
-	/* background: rgb(29, 29, 29); */
 	background-image: url("LOVI.png");
 	background-size:contain;
 	background-attachment:fixed;
 	background-repeat: repeat-y;
-	background-position: -10px;
 }
 #main{
 	width: 100%;
